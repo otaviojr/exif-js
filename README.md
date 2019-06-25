@@ -7,6 +7,34 @@ This package can also be used in AMD or CommonJS environments.
 
 **Note**: The EXIF standard applies only to `.jpg` and `.tiff` images. EXIF logic in this package is based on the EXIF standard v2.2 ([JEITA CP-3451, included in this repo](/spec/Exif2-2.pdf)).
 
+## Google Cardboard Photos
+
+I did changes in order to make this lib t work with Google Cardboard Phoro. So it can retrieve the right eye image and audio associated within the picture.
+
+### Usage
+
+**JavaScript**:
+```javascript
+
+import EXIF from 'exif-js';
+
+let url = "/teste.vr.jpg";
+
+EXIF.enableXmp();
+EXIF.getData({src: url}, function(){
+  if(this.exmpdata){
+    //mime type of the right eye image
+    const rightImageMimeType = this.xmpdata["x:xmpmeta"]["rdf:RDF"]["rdf:Description"]["@attributes"]["GImage:Mime"];
+    //base64 right eye image data
+    const rightImage = this.exmpdata["x:xmpmeta"]["rdf:RDF"]["rdf:Description"]["@attributes"]["GImage:Data"];
+    const audioData = this.exmpdata["x:xmpmeta"]["rdf:RDF"]["rdf:Description"]["@attributes"]["GAudio:Data"];
+
+    // you can load the src of a img with:
+    // img.src = "data:" + rightImageMimeType + ";base64," + rightImage;
+  }
+});
+```
+
 ## Install
 Install `exif-js` through [NPM](https://www.npmjs.com/#getting-started):
 
@@ -40,8 +68,8 @@ The tag names to use are listed in `EXIF.Tags` in `exif.js`.
 **Important**: Note that you have to wait for the image to be completely loaded, before calling `getData` or any other function. It will silently fail otherwise.
 You can implement this wait, by running your exif-extracting logic on the `window.onLoad` function. Or on an image's own `onLoad` function.
 For jQuery users please note that you can NOT (reliably) use jQuery's `ready` event for this. Because it fires before images are loaded.
-You could use $(window).load() instead of $(document.ready() (please note that `exif-js has NO dependency on jQuery or any other external library). 
- 
+You could use $(window).load() instead of $(document.ready() (please note that `exif-js has NO dependency on jQuery or any other external library).
+
 **JavaScript**:
 ```javascript
 window.onload=getExif;
