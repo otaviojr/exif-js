@@ -1,6 +1,6 @@
 var debug = false;
 
-var root = this;
+//var root = this;
 
 var EXIF = function(obj) {
     if (obj instanceof EXIF) return obj;
@@ -13,9 +13,9 @@ if (typeof exports !== 'undefined') {
         exports = module.exports = EXIF;
     }
     exports.EXIF = EXIF;
-} else {
-    root.EXIF = EXIF;
-}
+} // else {
+//    root.EXIF = EXIF;
+//}
 
 var ExifTags = EXIF.Tags = {
 
