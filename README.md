@@ -9,7 +9,7 @@ This package can also be used in AMD or CommonJS environments.
 
 ## Google Cardboard Photos
 
-I did changes in order to make this lib to work with Google Cardboard Photos. So it can retrieve the right eye image and audio associated within the picture.
+I did changes in order to make this lib to work with Google Cardboard Photos. So, it can retrieve the right eye image and audio associated within the picture. In order to do so, support to extended xmpdata data have been implemented.
 
 ### Usage
 
